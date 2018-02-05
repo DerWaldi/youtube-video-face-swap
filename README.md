@@ -13,9 +13,9 @@ I am using a desktop PC with one GTX1060 running ubuntu server 16.04.<br />
 Training the model for 100.000 epochs takes me about 30 hours. 
 
 ### Install packages from apt
-
+```
 sudo apt-get install ffmpeg x264 libx264-dev
-
+```
 #### Install xvfb for virtual screen
 ```
 sudo apt-get install xvfb  
@@ -26,8 +26,9 @@ wget https://gist.githubusercontent.com/ziadoz/3e8ab7e944d02fe872c3454d17af31a5/
 sudo sh ./install.sh
 ```
 ### Install required libraries
-
+```
 pip install -r requirements.txt
+```
 
 ## Usage
 
@@ -48,6 +49,8 @@ python3 2_train.py --src="angela merkel" --dst="taylor swift" --epochs=100000
 ```
 python3 3_youtube_face_swap.py --url="https://www.youtube.com/watch?v=XnbCSboujF4" --start=0 --stop=60 --gif=False
 ```
+
+## Examples
 ![Example GIF](https://github.com/DerWaldi/youtube-video-face-swap/blob/master/example.gif?raw=true "Example gif")
 
 ## Credits
