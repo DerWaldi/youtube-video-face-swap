@@ -50,6 +50,7 @@ python3 3_youtube_face_swap.py --url="https://www.youtube.com/watch?v=XnbCSboujF
 ```
 ![Example GIF](https://media.giphy.com/media/3ohs4xkT19aH18OME0/giphy.gif "Example gif")
 
+![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
 
 ## Credits
 
@@ -61,8 +62,3 @@ https://gist.github.com/ziadoz/3e8ab7e944d02fe872c3454d17af31a5
 
 Special thanks goes to Siraj Raval who inspired me to this project!<br/>
 https://github.com/llSourcell/deepfakes
-
-
-## (Off Topic) You are a musician and know the pain of finding sheet music?
-
-Checkout my main project: https://melodyscanner.com/
