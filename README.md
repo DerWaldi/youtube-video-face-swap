@@ -48,9 +48,7 @@ python3 2_train.py --src="angela merkel" --dst="taylor swift" --epochs=100000
 ```
 python3 3_youtube_face_swap.py --url="https://www.youtube.com/watch?v=XnbCSboujF4" --start=0 --stop=60 --gif=False
 ```
-![Example GIF](https://media.giphy.com/media/3ohs4xkT19aH18OME0/giphy.gif "Example gif")
-
-![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
+![Example GIF](https://github.com/DerWaldi/youtube-video-face-swap/blob/master/example.gif?raw=true "Example gif")
 
 ## Credits
 
