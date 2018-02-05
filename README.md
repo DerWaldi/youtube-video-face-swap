@@ -7,7 +7,7 @@ The only step where a human is needed is the quality in step 1.5.
 
 ## Installation
 
-### System Setup
+### My Setup
 
 I am using a desktop PC with one GTX1060 running ubuntu server 16.04.<br />
 Training the model for 100.000 epochs takes me about 30 hours. 
@@ -51,6 +51,7 @@ python3 3_youtube_face_swap.py --url="https://www.youtube.com/watch?v=XnbCSboujF
 ```
 
 ## Examples
+Donald Trump as Nicolas Cage:<br/>
 ![Example GIF](https://github.com/DerWaldi/youtube-video-face-swap/blob/master/example.gif?raw=true "Example gif")
 
 ## Credits
