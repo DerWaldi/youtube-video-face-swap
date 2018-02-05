@@ -105,3 +105,6 @@ out/
 models/
 data/
 temp/
+*.mp4
+*.mp3
+*.gif
