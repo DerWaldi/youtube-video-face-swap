@@ -1,9 +1,13 @@
 # YouTube Video Face Swap using "DeepFakes" Autoencoder-Model
 
-## Description
+## Overview
 
 The aim of this project ist to perform a face swap on a youtube video almost automatically.<br />
 The only step where a human is needed is the quality in step 1.5.
+
+### How does it work?
+Siraj Raval explains that pretty good in his video:<br/>
+https://www.youtube.com/watch?v=7XchCsYtYMQ&feature=youtu.be
 
 ## Installation
 
