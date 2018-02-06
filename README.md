@@ -69,6 +69,10 @@ python3 3_youtube_face_swap.py --url="https://www.youtube.com/watch?v=XnbCSboujF
 ## Examples
 Donald Trump as Nicolas Cage:<br/>
 ![Example GIF](https://github.com/DerWaldi/youtube-video-face-swap/blob/master/example.gif?raw=true "Example gif")
+<br/>
+Angela Merkel as Taylor Swift:<br/>
+![Example2 GIF](https://github.com/DerWaldi/youtube-video-face-swap/blob/master/examples2.gif?raw=true "Example2 gif")
+<br/>
 
 ## Credits
 
