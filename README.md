@@ -42,6 +42,10 @@ Scrape face images of two persons from google images.
 python3 1_get_faces.py --name="angela merkel" --limit=500
 python3 1_get_faces.py --name="taylor swift" --limit=500
 ```
+Or scrape face images from youtube videos (e.g. interviews).
+```
+python3 1_get_faces_from_yt.py --url="https://www.youtube.com/watch?v=XnbCSboujF4" --start=20 --stop=120 --limit=500
+```
 ### Step 1.5: The Human Eye
 
 Have a look at the extracted face images in "data/faces/"!
