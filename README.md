@@ -44,7 +44,8 @@ python3 1_get_faces.py --name="taylor swift" --limit=500
 ```
 Or scrape face images from youtube videos (e.g. interviews).
 ```
-python3 1_get_faces_from_yt.py --url="https://www.youtube.com/watch?v=XnbCSboujF4" --start=20 --stop=120 --name="taylor swift --limit=500
+python3 1_get_faces_from_yt.py --url="https://www.youtube.com/watch?v=XtHwjrm4sMg" --start=30 --stop=200 --name="siraj raval" --limit=500
+python3 1_get_faces_from_yt.py --url="https://www.youtube.com/watch?v=kwRM4PQdheE" --start=60 --stop=179 --name="kal penn" --limit=500
 ```
 ### Step 1.5: The Human Eye
 
