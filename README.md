@@ -71,8 +71,17 @@ Donald Trump as Nicolas Cage:<br/>
 ![Example GIF](https://github.com/DerWaldi/youtube-video-face-swap/blob/master/example.gif?raw=true "Example gif")
 <br/>
 Angela Merkel as Taylor Swift:<br/>
-![Example2 GIF](https://github.com/DerWaldi/youtube-video-face-swap/blob/master/examples2.gif?raw=true "Example2 gif")
+![Example2 GIF](https://github.com/DerWaldi/youtube-video-face-swap/blob/master/examples2.gif?raw=true "Example2 gif")<br/>
+[Video with better quality](https://github.com/DerWaldi/youtube-video-face-swap/raw/master/examples2.mp4)
 <br/>
+![Example3 GIF](https://github.com/DerWaldi/youtube-video-face-swap/blob/master/example3.gif?raw=true "Example3 gif")<br/>
+[Video with better quality](https://github.com/DerWaldi/youtube-video-face-swap/raw/master/example3.mp4)
+
+
+## What's coming next?
+
+Since I am more into audio processing, I would like to transfer the concept of face swapping on music signals.<br/>
+If you have any suggestions, please let me know.
 
 ## Credits
 
