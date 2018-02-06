@@ -58,6 +58,12 @@ In this example Merkel's face will be inserted on Taylor Swift.
 ```
 python3 2_train.py --src="angela merkel" --dst="taylor swift" --epochs=100000
 ```
+
+### Pre-trained Model
+
+You can download a pre trained model for Angela Swift [here](https://anonfile.com/Ec8a61ddbf/Angela_Swift.zip)<br/>
+Just place the "models" folder next to the code directory.
+
 ### Step 3: Apply Face Swap on YouTube Video
 Perform facesqp on a youtube video.<br/>
 The "--start" and "--stop" parameters define in seconds where to clip the video.<br/>
@@ -75,7 +81,11 @@ Angela Merkel as Taylor Swift:<br/>
 [Video with better quality](https://github.com/DerWaldi/youtube-video-face-swap/raw/master/examples2.mp4)
 <br/>
 ![Example3 GIF](https://github.com/DerWaldi/youtube-video-face-swap/blob/master/example3.gif?raw=true "Example3 gif")<br/>
-[Video with better quality](https://github.com/DerWaldi/youtube-video-face-swap/raw/master/example3.mp4)
+[Video with better quality](https://github.com/DerWaldi/youtube-video-face-swap/raw/master/example3.mp4)<br/>
+<br/>
+The first two exampels are trained with images scraped from google, that's why the swapped faces look a bit frozen. <br/>
+The last one was trained using only two videos of interviews.<br/>
+You can see that it can transfer facial expressions much better than the ones trained with static images.
 
 
 ## What's coming next?
