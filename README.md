@@ -37,8 +37,10 @@ pip install -r requirements.txt
 ## Usage
 
 ### Step 1: Fetch Training Data
+Scrape face images of two persons from google images.
 ```
-python3 1_get_the_data.py --src="angela merkel" --dst="taylor swift" --limit=500
+python3 1_get_faces.py --name="angela merkel" --limit=500
+python3 1_get_faces.py --name="taylor swift" --limit=500
 ```
 ### Step 1.5: The Human Eye
 
@@ -46,10 +48,15 @@ Have a look at the extracted face images in "data/faces/"!
 There will appear some missextractions, just delete the images that don't fit.
 
 ### Step 2: Train Model
+Train the faceswap model with the collected face images.<br/>
+In this example Merkel's face will be inserted on Taylor Swift.
 ```
 python3 2_train.py --src="angela merkel" --dst="taylor swift" --epochs=100000
 ```
 ### Step 3: Apply Face Swap on YouTube Video
+Perform facesqp on a youtube video.<br/>
+The "--start" and "--stop" parameters define in seconds where to clip the video.<br/>
+Set "--gif" to "True" if you want to export the generated video as gif file. 
 ```
 python3 3_youtube_face_swap.py --url="https://www.youtube.com/watch?v=XnbCSboujF4" --start=0 --stop=60 --gif=False
 ```
