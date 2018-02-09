@@ -1,3 +1,5 @@
+# obtained from here https://github.com/deepfakes/faceswap
+
 from keras.models import Model
 from keras.layers import Input, Dense, Flatten, Reshape
 from keras.layers.advanced_activations import LeakyReLU

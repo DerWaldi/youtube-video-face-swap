@@ -34,12 +34,15 @@ mean_face_y = numpy.array([
 
 landmarks_2D = numpy.stack( [ mean_face_x, mean_face_y ], axis=1 )
 
+# get face align matrix from landmarks
 def get_align_mat(face):
     return umeyama( numpy.array(face.landmarksAsXY()[17:]), landmarks_2D, True )[0:2]
 
+# get inverse face align matrix from landmarks
 def get_align_mat_inv(face):
     return umeyama(landmarks_2D, numpy.array(face.landmarksAsXY()[17:]), True )[0:2]
 
+# detect faces in image
 def detect_faces(frame):
     face_locations = face_recognition.face_locations(frame)
     landmarks = _raw_face_landmarks(frame, face_locations)   
@@ -47,6 +50,7 @@ def detect_faces(frame):
     for ((y, right, bottom, x), landmarks) in zip(face_locations, landmarks):
         yield DetectedFace(frame[y: bottom, x: right], x, right - x, y, bottom - y, landmarks)
 
+# extract all faces in image
 def extract_faces(image, size):    
     facelist = []
     for face in detect_faces(image):
@@ -70,6 +74,7 @@ def _raw_face_landmarks(face_image, face_locations):
 def _css_to_rect(css):
     return dlib.rectangle(css[3], css[0], css[1], css[2])
 
+# detected face class
 class DetectedFace(object):
     def __init__(self, image, x, w, y, h, landmarks):
         self.image = image
@@ -78,11 +83,14 @@ class DetectedFace(object):
         self.y = y
         self.h = h
         self.landmarks = landmarks
-    
+
+    # retrieve landmarks as tuple list
     def landmarksAsXY(self):
         return [(p.x, p.y) for p in self.landmarks.parts()]
 
+# this method is used to insert extracted faces again into the original image
 def blend_warp(src, dst, mat):
+    # use some kind of blend to smooth the border
     imgMask = numpy.ones(src.shape)
     imgMask[0,:,:] = 0
     imgMask[:,0,:] = 0
@@ -91,8 +99,9 @@ def blend_warp(src, dst, mat):
     imgMaskWarped = cv2.warpAffine( imgMask, mat, (dst.shape[1],dst.shape[0]))[:, :, 0]
     
     src_warped = cv2.warpAffine( src, mat, (dst.shape[1],dst.shape[0]))
-    alpha = imgMaskWarped
-    beta = (1.0 - alpha) * 0.95
+    # make the colors smoother with a maximum face alpha of 95%
+    alpha = imgMaskWarped * 0.95
+    beta = (1.0 - alpha)
     res_warped = dst.copy()
     for c in range(0, 3):
         res_warped[:, :, c] = (beta * dst[:, :, c] + alpha * src_warped[:, :, c])

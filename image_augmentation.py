@@ -1,8 +1,12 @@
+# based on deepfakes sample project
+# https://github.com/deepfakes/faceswap
+
 import cv2
 import numpy
 
 from umeyama import umeyama
 
+# apply a random transformation on the training data to create a more robust model
 def random_transform( image, rotation_range, zoom_range, shift_range, random_flip ):
     h,w = image.shape[0:2]
     rotation = numpy.random.uniform( -rotation_range, rotation_range )

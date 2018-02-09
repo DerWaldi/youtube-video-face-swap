@@ -1,7 +1,11 @@
+# based on deepfakes sample project
+# https://github.com/deepfakes/faceswap
+
 import cv2
 import numpy
 import os
 
+# returns a list of file paths of all images in a specific directory
 def get_image_paths( directory ):
     return [ x.path for x in os.scandir( directory ) if x.name.endswith(".jpg") or x.name.endswith(".png") ]
 
@@ -24,6 +28,7 @@ def get_transpose_axes( n ):
         x_axes = list( range( 1, n-1, 2 ) )
     return y_axes, x_axes, [n-1]
 
+# stacks images on another, needed for preview during training
 def stack_images( images ):
     images_shape = numpy.array( images.shape )
     new_axes = get_transpose_axes( len( images_shape ) )

@@ -25,6 +25,8 @@ def extract_faces_from_video(in_filename, keyword, limit=500):
             
     # open source video
     vidcap = cv2.VideoCapture(in_filename)
+
+    # get some parameters
     width = int(vidcap.get(cv2.CAP_PROP_FRAME_WIDTH))
     height = int(vidcap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     fps = int(vidcap.get(cv2.CAP_PROP_FPS))
@@ -51,28 +53,34 @@ def extract_faces_from_video(in_filename, keyword, limit=500):
                 face_counter +=1
                 # has limit been reached?
                 if face_counter > limit:
-                    break;
+                    break
             except:
                 print("Unexpected error:", sys.exc_info()[0])
-
+    # release video capture and close input video file
     vidcap.release()
 
 def download_video(url, start=0, stop=0):     
     def on_downloaded(stream, file_handle):
+        # get filename of downloaded file (we can't set a output directory) and close the handle
         fn = file_handle.name
-        file_handle.close()        
+        file_handle.close()
+        # load downloaded video
         clip = VideoFileClip(fn)
         
         # clip with start and stop
         if(start >= 0 and stop >= 0):
             clip = clip.subclip(start, stop)
-        
+
+        # store clipped video in our temporary folder
         clip.write_videofile("./temp/src_video.mp4", progress_bar=False, verbose=False)
+        # remove original downloaded file
         os.remove(fn)
     
     # download youtube video from url
     yt = YouTube(url)
+    # clip file after downlaod
     yt.register_on_complete_callback(on_downloaded)
+    # get first "mp4" stream as explained here: https://github.com/nficano/pytube
     yt.streams.filter(subtype='mp4').first().download()
 
 if __name__ == "__main__":

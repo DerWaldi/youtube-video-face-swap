@@ -26,19 +26,23 @@ try:
     decoder_A.load_weights("models/decoder_A.h5")
     decoder_B.load_weights("models/decoder_B.h5")
 except:
+    # error we can't faceswap without a model
     print( "No trained model found!" )
     pass
 
+# perform the actual face swap
 def face_swap(orig_image, down_scale):
     # extract face from original
     facelist = extract_faces(orig_image, 256)
     result_image = orig_image
-    
+
+    # iterate through all detected faces
     for (face, resized_image) in facelist:
         range_ = numpy.linspace( 128-80, 128+80, 5 )
         mapx = numpy.broadcast_to( range_, (5,5) )
         mapy = mapx.T
 
+        # warp image like in the training
         mapx = mapx + numpy.random.normal( size=(5,5), scale=5 )
         mapy = mapy + numpy.random.normal( size=(5,5), scale=5 )
 
@@ -51,19 +55,24 @@ def face_swap(orig_image, down_scale):
         test_images = numpy.empty( ( 1, ) + warped_resized_image.shape )
         test_images[0] = warped_resized_image
 
+        # predict faceswap using encoder A
         figure = autoencoder_A.predict(test_images)
 
         new_face = numpy.clip(numpy.squeeze(figure[0]) * 255.0, 0, 255).astype('uint8')
         mat_inv = umeyama( dst_points, src_points, True )[0:2]
 
+        # insert face into extracted face
         dest_face = blend_warp(new_face, resized_image, mat_inv)
 
+        # create an inverse affine transform matrix to insert extracted face again
         mat = get_align_mat(face)
         mat = mat * (256 - 2 * 48)
         mat[:,2] += 48    
         mat_inv = cv2.invertAffineTransform(mat)
+        # insert new face into original image
         result_image = blend_warp(dest_face, result_image, mat_inv)
 
+    # return resulting image after downscale
     return cv2.resize(result_image, (result_image.shape[1] // down_scale, result_image.shape[0] // down_scale))
 
 def process_video(in_filename, out_filename, keep_audio=True, down_scale=2):
@@ -74,6 +83,8 @@ def process_video(in_filename, out_filename, keep_audio=True, down_scale=2):
             
     # open source video
     vidcap = cv2.VideoCapture(in_filename)
+
+    # get some parameters from input video
     width = int(vidcap.get(cv2.CAP_PROP_FRAME_WIDTH))
     height = int(vidcap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     fps = int(vidcap.get(cv2.CAP_PROP_FPS))
@@ -90,15 +101,18 @@ def process_video(in_filename, out_filename, keep_audio=True, down_scale=2):
         success,image = vidcap.read()
 
         if success != True:
+            # no frames left => break
             break
             
         try:
+            # process next frame
             new_image = face_swap(image, down_scale)
         except:
             # if an error occurs => take the original frame
             new_image = cv2.resize(image, (width // down_scale, height // down_scale))
         vidwriter.write(new_image)    
 
+    # releas video capture and writer
     vidcap.release()
     vidwriter.release()
     
@@ -108,21 +122,25 @@ def process_video(in_filename, out_filename, keep_audio=True, down_scale=2):
         video.write_videofile(out_filename, audio="./temp/src_audio.mp3", progress_bar=False, verbose=False)
 
 def video_to_gif(in_filename, out_filename):
-    # just in case: how to create a gif
+    # load clip in moviepy and save as gif
     clip = VideoFileClip(in_filename)
     clip.write_gif(out_filename)
     
 def download_video(url, start=0, stop=0):     
     def on_downloaded(stream, file_handle):
+        # get filename of downloaded file (we can't set a output directory) and close the handle
         fn = file_handle.name
-        file_handle.close()        
+        file_handle.close()
+        # load downloaded video into moviepy
         clip = VideoFileClip(fn)
         
         # clip with start and stop
         if(start >= 0 and stop >= 0):
             clip = clip.subclip(start, stop)
-        
+
+        # store clipped video in our temporary folder
         clip.write_videofile("./temp/src_video.mp4", progress_bar=False, verbose=False)
+        # remove original downloaded file
         os.remove(fn)
     
     # download youtube video from url
@@ -151,6 +169,7 @@ if __name__ == "__main__":
     print("Stored generated video as: output.mp4")
     
     if args.gif:
+        # you want a gif, you get a gif
         video_to_gif("output.mp4", "output.gif")
         print("Stored generated gif as: output.gif")
         

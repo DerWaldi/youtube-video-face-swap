@@ -1,3 +1,6 @@
+# based on the code from Rushil Srivastava
+# https://github.com/rushilsrivastava/image-scrapers/blob/master/google-scrapper.py
+
 import requests
 import time
 import urllib

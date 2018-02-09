@@ -24,6 +24,7 @@ try:
     decoder_B.load_weights( "models/decoder_B.h5" )
     print( "loaded existing model" )
 except:
+    # no model to load create new one
     pass
 
 def save_model_weights():
@@ -55,21 +56,27 @@ if __name__ == "__main__":
     images_B = load_images( images_B ) / 255.0
     images_A += images_B.mean( axis=(0,1,2) ) - images_A.mean( axis=(0,1,2) )
 
+    # create 100 preview images during training (to not spam your disk)
     print_rate = args.epochs // 100
     if print_rate < 1:
         print_rate = 1
-    
+
+    # iterate epochs and train
     for epoch in tqdm(range(args.epochs)):
+        # get next training batch
         batch_size = 64
         warped_A, target_A = get_training_data( images_A, batch_size )
         warped_B, target_B = get_training_data( images_B, batch_size )
 
+        # train and calculate loss
         loss_A = autoencoder_A.train_on_batch( warped_A, target_A )
         loss_B = autoencoder_B.train_on_batch( warped_B, target_B )
 
         if epoch % 100 == 0:
-            # print trianing loss
+            # print training loss
             # print( loss_A, loss_B )
+
+            # save model every 100 steps
             save_model_weights()
             test_A = target_A[0:14]
             test_B = target_B[0:14]
@@ -87,6 +94,7 @@ if __name__ == "__main__":
                 autoencoder_A.predict( test_B ),
                 ], axis=1 )
 
+            # stack images together to create a preview sheet
             figure = numpy.concatenate( [ figure_A, figure_B ], axis=0 )
             figure = figure.reshape( (4,7) + figure.shape[1:] )
             figure = stack_images( figure )
@@ -95,5 +103,6 @@ if __name__ == "__main__":
             figure = numpy.clip( figure * 255, 0, 255 ).astype('uint8')
             cv2.imwrite( "./out/" + str(epoch) + ".jpg", figure )
 
+    # save our model after training has finished
     save_model_weights()
 
