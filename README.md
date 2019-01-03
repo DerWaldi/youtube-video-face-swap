@@ -2,7 +2,7 @@
 
 ## Overview
 
-The aim of this project ist to perform a face swap on a youtube video almost automatically.<br />
+The aim of this project is to perform a face swap on a youtube video almost automatically.<br />
 The only step where a human is needed is the quality in step 1.5.
 
 ### How does it work?
